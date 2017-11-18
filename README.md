@@ -22,9 +22,9 @@ Sql Server
 
 AutoMapper
 
-Injeção de depêndencia
+InjeÃ§Ã£o de depÃªndencia
 
-Divisão em camadas
+DivisÃ£o em camadas
 
 ```
 
@@ -48,4 +48,4 @@ Bootstrap
 
 #### Pagina inicial
  
- ![alt text](https://raw.githubusercontent.com/flabioassuncao/ControleDeCusto/master/imagens/pagina_inicial.png)
+ ![alt text](https://raw.githubusercontent.com/flabioassuncao/ControleDeCusto/master/Imagens/pagina_inicial.png)
