@@ -1,0 +1,12 @@
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\bin\Debug\netcoreapp2.0\ControleDeCustos.Site.deps.json
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\bin\Debug\netcoreapp2.0\ControleDeCustos.Site.runtimeconfig.json
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\bin\Debug\netcoreapp2.0\ControleDeCustos.Site.runtimeconfig.dev.json
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\bin\Debug\netcoreapp2.0\ControleDeCustos.Site.dll
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\bin\Debug\netcoreapp2.0\ControleDeCustos.Site.pdb
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.csproj.CoreCompileInputs.cache
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.AssemblyInfoInputs.cache
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.AssemblyInfo.cs
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.dll
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.pdb
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Site\obj\Debug\netcoreapp2.0\ControleDeCustos.Site.csprojResolveAssemblyReference.cache

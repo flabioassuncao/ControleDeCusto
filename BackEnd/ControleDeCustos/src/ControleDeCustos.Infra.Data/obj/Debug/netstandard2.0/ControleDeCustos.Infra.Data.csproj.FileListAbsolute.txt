@@ -1,0 +1,12 @@
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\appsettings.json
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\ControleDeCustos.Infra.Data.deps.json
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\ControleDeCustos.Infra.Data.dll
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\ControleDeCustos.Infra.Data.pdb
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\ControleDeCustos.Domain.dll
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\bin\Debug\netstandard2.0\ControleDeCustos.Domain.pdb
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.csprojResolveAssemblyReference.cache
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.csproj.CoreCompileInputs.cache
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.AssemblyInfoInputs.cache
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.AssemblyInfo.cs
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.dll
+E:\Repos\vs17\ControleDeCusto\BackEnd\ControleDeCustos\src\ControleDeCustos.Infra.Data\obj\Debug\netstandard2.0\ControleDeCustos.Infra.Data.pdb

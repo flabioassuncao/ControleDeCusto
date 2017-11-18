@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ControleDeCustos.Application\ControleDeCustos.Application.csproj" />
+    <ProjectReference Include="..\ControleDeCustos.Domain\ControleDeCustos.Domain.csproj" />
+    <ProjectReference Include="..\ControleDeCustos.Infra.Data\ControleDeCustos.Infra.Data.csproj" />
+    <ProjectReference Include="..\ControleDeCustos.Infra.Identity\ControleDeCustos.Infra.Identity.csproj" />
+  </ItemGroup>
+
+</Project>
