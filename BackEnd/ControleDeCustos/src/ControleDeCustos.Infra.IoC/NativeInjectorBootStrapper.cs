@@ -32,6 +32,7 @@ namespace ControleDeCustos.Infra.IoC
             services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
             services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddScoped<IFuncionarioDepartamentoRepository, FuncionarioDepartamentoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<CDCContext>();
             

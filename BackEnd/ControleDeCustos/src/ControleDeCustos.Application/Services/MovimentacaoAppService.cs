@@ -13,24 +13,29 @@ namespace ControleDeCustos.Application.Services
         private readonly IMovimentacaoRepository _movRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
 
         public MovimentacaoAppService(IMovimentacaoRepository movRepository,
                                       IUser user,
+                                      IUnitOfWork uow,
                                       IMapper mapper)
         {
             _movRepository = movRepository;
             _mapper = mapper;
+            _uow = uow;
             _user = user;
         }
 
         public void Atualizar(MovimentacaoViewModel movimentacaoViewModel)
         {
             _movRepository.Atualizar(_mapper.Map<Movimentacao>(movimentacaoViewModel));
+            _uow.Commit();
         }
         
         public void Excluir(Guid id)
         {
             _movRepository.Remover(id);
+            _uow.Commit();
         }
 
         public MovimentacaoViewModel ObterPorId(Guid id)
@@ -46,6 +51,7 @@ namespace ControleDeCustos.Application.Services
         public void Registrar(MovimentacaoViewModel movimentacaoViewModel)
         {
             _movRepository.Adicionar(_mapper.Map<Movimentacao>(movimentacaoViewModel));
+            _uow.Commit();
         }
 
         public void Dispose()

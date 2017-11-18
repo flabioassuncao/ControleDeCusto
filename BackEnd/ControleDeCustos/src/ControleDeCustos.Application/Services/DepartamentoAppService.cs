@@ -13,24 +13,29 @@ namespace ControleDeCustos.Application.Services
         private readonly IMapper _mapper;
         private readonly IDepartamentoRepository _departamentoRepository;
         private readonly IUser _user;
+        private readonly IUnitOfWork _uow;
 
         public DepartamentoAppService(IMapper mapper,
                                       IDepartamentoRepository departamentoRepository,
+                                      IUnitOfWork uow,
                                       IUser user)
         {
             _mapper = mapper;
             _departamentoRepository = departamentoRepository;
+            _uow = uow;
             _user = user;
         }
 
         public void Atualizar(DepartamentoViewModel departamentoViewModel)
         {
             _departamentoRepository.Atualizar(_mapper.Map<Departamento>(departamentoViewModel));
+            _uow.Commit();
         }
         
         public void Excluir(Guid id)
         {
             _departamentoRepository.Remover(id);
+            _uow.Commit();
         }
 
         public DepartamentoViewModel ObterPorId(Guid id)
@@ -46,6 +51,7 @@ namespace ControleDeCustos.Application.Services
         public void Registrar(DepartamentoViewModel departamentoViewModel)
         {
             _departamentoRepository.Adicionar(_mapper.Map<Departamento>(departamentoViewModel));
+            _uow.Commit();
         }
 
         public void Dispose()

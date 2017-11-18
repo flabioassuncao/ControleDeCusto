@@ -11,26 +11,34 @@ namespace ControleDeCustos.Application.Services
     public class FuncionarioAppService : IFuncionarioAppService
     {
         private readonly IFuncionarioRepository _funcRepository;
+        private readonly IFuncionarioDepartamentoRepository _funcDepRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
 
         public FuncionarioAppService(IFuncionarioRepository funcRepository,
+                                     IFuncionarioDepartamentoRepository funcDepRepository,
                                      IMapper mapper,
+                                     IUnitOfWork uow,
                                      IUser user)
         {
             _funcRepository = funcRepository;
+            _funcDepRepository = funcDepRepository;
             _mapper = mapper;
+            _uow = uow;
             _user = user;
         }
 
         public void Atualizar(FuncionarioViewModel funcionarioViewModel)
         {
             _funcRepository.Atualizar(_mapper.Map<Funcionario>(funcionarioViewModel));
+            _uow.Commit();
         }
         
         public void Excluir(Guid id)
         {
             _funcRepository.Remover(id);
+            _uow.Commit();
         }
 
         public FuncionarioViewModel ObterPorId(Guid id)
@@ -46,6 +54,8 @@ namespace ControleDeCustos.Application.Services
         public void Registrar(FuncionarioViewModel funcionarioViewModel)
         {
             _funcRepository.Adicionar(_mapper.Map<Funcionario>(funcionarioViewModel));
+
+            _uow.Commit();
         }
 
         public void Dispose()
