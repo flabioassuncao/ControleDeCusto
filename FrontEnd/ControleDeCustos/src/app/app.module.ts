@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -9,6 +10,9 @@ import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
+import { DepartamentoService } from './services/departamento.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FuncionarioService } from './services/funcionario.service';
 
 @NgModule({
   declarations: [
@@ -21,9 +25,15 @@ import { ROUTES } from './app.routes';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES, {useHash: false})
   ],
-  providers: [],
+  providers: [
+    DepartamentoService,
+    FuncionarioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

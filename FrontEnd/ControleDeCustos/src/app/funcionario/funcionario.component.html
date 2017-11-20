@@ -1,3 +1,86 @@
-<p>
-  funcionario works!
-</p>
+<section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-6">
+        <div class="box box-success">
+          <div class="box-header with-border">
+            <h3 class="box-title">Cadastrar funcionario</h3>
+          </div>
+          <div class="box-body">
+            <form [formGroup]="funcionarioForm" novalidate>
+              <div class="form-group" [ngClass]="{'has-error': (!funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched)) , 'has-success': (funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))} ">
+                <label>Funcionario</label>
+                <input type="email" class="form-control" placeholder="Nome do funcionario" formControlName="nome">
+                <label class="control-label" *ngIf="(funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))" for="inputSuccess"><i class="fa fa-check"></i> OK</label>
+                <label class="control-label" *ngIf="(!funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))" for="inputError"><i class="fa fa-times-circle-o"></i> Campo deve conter 2 a 100 caracteres</label>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Departamento</label>
+                        <select class="form-control" formControlName="departamento">
+                          <option *ngFor="let departamento of departamentos" [ngValue]="departamento">
+                            {{ departamento?.nome }}
+                          </option>
+                        </select>
+                      </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group" style="margin: 23px;">
+                      <button type="button" (click)="adicionarDepartamento()" class="btn btn-success">Adicionar departamento</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="box-body table-responsive no-padding">
+                      <table class="table table-hover">
+                        <tr>
+                          <th>Departamentos adicionados</th>
+                          <th></th>
+                        </tr>
+                        <tr *ngFor="let departamento of funcionarioDepartamento">
+                          <td>{{departamento?.nome}}</td>
+                          <td (click)="removerDepartamento(departamento)"><span class="label label-danger">remover</span></td>
+                        </tr>
+                      </table>
+                    </div>
+              </div>
+            </form>
+          </div>
+          <div class="box-footer">
+            <button type="submit" (click)="limparCampos()" class="btn btn-danger">Cancelar</button>
+            <button type="submit" (click)="registrarFuncionario()" [disabled]='(!funcionarioForm.valid) || funcionarioDepartamento.length === 0' class="btn btn-success pull-right">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box box-success">
+          <div class="box-header">
+            <h3 class="box-title">Funcionarios cadastrados</h3>
+  
+            <!-- <div class="box-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+  
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                </div> -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Nome dos funcionarios</th>
+              </tr>
+              <tr *ngFor="let funcionario of funcionarios">
+                <td>{{funcionario?.nome}}</td>
+              </tr>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+      </div>
+    </div>
+  </section>
