@@ -53,21 +53,33 @@
           <div class="box-tools">
 
 
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <!-- <input type="text" name="table_search" class="form-control" placeholder="Filtrar por descrição"> -->
-
-              <select class="form-control" placeholder="Filtrar por funcionario" [(ngModel)]="funcionarioIdFilter">
-                <option selected></option>
-                <option *ngFor="let funcionario of funcionarios" [ngValue]="funcionario.id">
-                  {{ funcionario?.nome }}
-                </option>
-              </select>
-
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-default" (click)="FiltrarMovimentacoes()">
-                  <i class="fa fa-filter"></i>
-                </button>
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <div class="row">
+                  <div class="col-md-6" style="padding: 0;">
+                      <input type="text" name="table_search" class="form-control" placeholder="Filtrar por descrição" [(ngModel)]="descricaoFilter">
+                  </div>
+                  <div class="col-md-3" style="padding: 0;">
+                      <select class="form-control" placeholder="Filtrar por funcionario" [(ngModel)]="funcionarioIdFilter">
+                          <option value="0" selected></option>
+                          <option *ngFor="let funcionario of funcionarios" [ngValue]="funcionario.id">
+                            {{ funcionario?.nome }}
+                          </option>
+                        </select>
+                  </div>
+                  <div class="col-md-3" style="padding: 0;">
+                      <div class="input-group-btn">
+                          <button type="submit" class="btn btn-default" title="Filtrar movimentações" (click)="filtrarMovimentacoes()">
+                            <i class="fa fa-filter"></i>
+                          </button>
+                          <button type="submit" class="btn btn-default" title="Limpar filtros" (click)="limparFiltros()">
+                            <i class="fa fa-remove"></i>
+                          </button>
+                        </div>
+                  </div>
               </div>
+
+
+              
             </div>
           </div>
         </div>

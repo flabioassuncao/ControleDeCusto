@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using ControleDeCustos.Domain.Interfaces;
 using ControleDeCustos.Application.Interfaces;
 using ControleDeCustos.Application.ViewModels;
+using ControleDeCustos.Application.DTO;
 
 namespace ControleDeCustos.Services.Api.Controllers
 {
@@ -20,9 +21,9 @@ namespace ControleDeCustos.Services.Api.Controllers
 
         [HttpGet]
         [Route("obter-todos-funcionarios")]
-        public IEnumerable<FuncionarioViewModel> Get()
+        public IEnumerable<FuncionarioDTO> Get()
         {
-            return _funcAppService.ObterTodos();
+            return _funcAppService.ObterTodosDTO();
         }
         
         [HttpGet]

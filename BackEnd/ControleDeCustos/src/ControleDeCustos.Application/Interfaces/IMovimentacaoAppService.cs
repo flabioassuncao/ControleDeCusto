@@ -8,7 +8,7 @@ namespace ControleDeCustos.Application.Interfaces
     {
         void Registrar(MovimentacaoViewModel movimentacaoViewModel);
         IEnumerable<MovimentacaoViewModel> ObterTodos();
-        //IEnumerable<MovimentacaoViewModel> ObterPorFiltros();
+        IEnumerable<MovimentacaoViewModel> ObterPorFiltros(Guid idFuncionario, string descricao);
         MovimentacaoViewModel ObterPorId(Guid id);
         void Atualizar(MovimentacaoViewModel movimentacaoViewModel);
         void Excluir(Guid id);

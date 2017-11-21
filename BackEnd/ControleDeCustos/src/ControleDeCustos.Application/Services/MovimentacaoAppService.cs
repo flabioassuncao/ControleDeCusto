@@ -43,6 +43,11 @@ namespace ControleDeCustos.Application.Services
             return _mapper.Map<MovimentacaoViewModel>(_movRepository.ObterPorId(id));
         }
 
+        public IEnumerable<MovimentacaoViewModel> ObterPorFiltros(Guid idFuncionario, string descricao)
+        {
+            return _mapper.Map<List<MovimentacaoViewModel>>(_movRepository.ObterPorFiltros(idFuncionario, descricao));
+        }
+
         public IEnumerable<MovimentacaoViewModel> ObterTodos()
         {
             return _mapper.Map<List<MovimentacaoViewModel>>(_movRepository.ObterTodos());

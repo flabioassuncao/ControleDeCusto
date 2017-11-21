@@ -42,7 +42,7 @@ namespace ControleDeCustos.Application.Services
         {
             return _mapper.Map<DepartamentoViewModel>(_departamentoRepository.ObterPorId(id));
         }
-
+        
         public IEnumerable<DepartamentoViewModel> ObterTodos()
         {
             return _mapper.Map<List<DepartamentoViewModel>>(_departamentoRepository.ObterTodos());

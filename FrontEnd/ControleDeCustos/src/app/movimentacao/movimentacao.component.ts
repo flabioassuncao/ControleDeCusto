@@ -19,6 +19,7 @@ export class MovimentacaoComponent implements OnInit {
   movimentacao: Movimentacao = new Movimentacao;
 
   funcionarioIdFilter: string;
+  descricaoFilter = '';
 
   constructor(private funService: FuncionarioService,
     private movService: MovimentacaoService,
@@ -59,8 +60,16 @@ export class MovimentacaoComponent implements OnInit {
       });
   }
 
-  FiltrarMovimentacoes() {
-    console.log(this.funcionarioIdFilter);
+  filtrarMovimentacoes() {
+    this.movService.movimentacaoesFiltradas(this.funcionarioIdFilter, this.descricaoFilter)
+              .subscribe(movimentacoes => this.movimentacoes = movimentacoes);
+  }
+
+  limparFiltros() {
+    this.funcionarioIdFilter = '0';
+    this.descricaoFilter = '';
+    this.movService.movimentacaoesFiltradas(this.funcionarioIdFilter, this.descricaoFilter)
+    .subscribe(movimentacoes => this.movimentacoes = movimentacoes);
   }
 
 }

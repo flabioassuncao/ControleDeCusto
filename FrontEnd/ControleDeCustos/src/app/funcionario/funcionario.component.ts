@@ -33,7 +33,10 @@ export class FuncionarioComponent implements OnInit {
   }
 
   carrregarFuncionarios() {
-    this.funService.funcionarios().subscribe(funcionarios => this.funcionarios = funcionarios);
+    this.funService.funcionarios().subscribe(funcionarios => {
+      console.log(funcionarios);
+      this.funcionarios = funcionarios;
+    });
   }
 
   carrregarDepartamentos() {
@@ -47,12 +50,10 @@ export class FuncionarioComponent implements OnInit {
     dep.departamentoId = departamento.id;
     if (this.funcionarioDepartamento.find(x => x.departamentoId === dep.departamentoId) === undefined) {
       this.funcionarioDepartamento.push(dep);
-      // console.log(this.funcionarioDepartamento);
     }
   }
 
   removerDepartamento(departamento: FuncionarioDepartamento) {
-    // console.log(departamento);
     const index: number = this.funcionarioDepartamento.indexOf(departamento);
     if (index !== -1) {
       this.funcionarioDepartamento.splice(index, 1);
@@ -61,15 +62,12 @@ export class FuncionarioComponent implements OnInit {
 
   limparCampos() {
     this.funcionarioForm.reset();
+    this.funcionarioDepartamento = [];
   }
 
   registrarFuncionario() {
-    // console.log(this.funcionarioForm.value);
     this.funcionario.nome =  this.funcionarioForm.value.nome;
     this.funcionario.departamentos = this.funcionarioDepartamento;
-
-    // console.log(JSON.stringify(this.funcionario));
-
     this.funService.registrarFuncionario(this.funcionario)
       .subscribe(result => {
         this.limparCampos();

@@ -7,5 +7,6 @@ namespace ControleDeCustos.Domain.Interfaces
 {
     public interface IMovimentacaoRepository : IRepository<Movimentacao>
     {
+        IEnumerable<Movimentacao> ObterPorFiltros(Guid idFuncionario, string descricao);
     }
 }
