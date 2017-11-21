@@ -1,3 +1,93 @@
-<p>
-  movimentacao works!
-</p>
+<section class="content">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cadastrar movimentação</h3>
+        </div>
+        <div class="box-body">
+          <form [formGroup]="movimentacaoForm" novalidate>
+            <div class="form-group" [ngClass]="{'has-error': (!movimentacaoForm.get('descricao').valid && (movimentacaoForm.get('descricao').dirty || movimentacaoForm.get('descricao').touched)) , 'has-success': (movimentacaoForm.get('descricao').valid && (movimentacaoForm.get('descricao').dirty || movimentacaoForm.get('descricao').touched))} ">
+              <label>Descrição</label>
+              <textarea type="text" class="form-control" rows="3" placeholder="Descrição da movimentação..." formControlName="descricao"> </textarea>
+              <label class="control-label" *ngIf="(movimentacaoForm.get('descricao').valid && (movimentacaoForm.get('descricao').dirty || movimentacaoForm.get('descricao').touched))"
+                for="inputSuccess">
+                <i class="fa fa-check"></i> OK</label>
+              <label class="control-label" *ngIf="(!movimentacaoForm.get('descricao').valid && (movimentacaoForm.get('descricao').dirty || movimentacaoForm.get('descricao').touched))"
+                for="inputError">
+                <i class="fa fa-times-circle-o"></i> Campo deve conter 2 a 500 caracteres</label>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error': (!movimentacaoForm.get('valor').valid && (movimentacaoForm.get('valor').dirty || movimentacaoForm.get('valor').touched)) , 'has-success': (movimentacaoForm.get('valor').valid && (movimentacaoForm.get('valor').dirty || movimentacaoForm.get('valor').touched))} ">
+              <label>Valor</label>
+              <input type="text" class="form-control" rows="3" placeholder="Valor da movimentação..." formControlName="valor">
+              <label class="control-label" *ngIf="(movimentacaoForm.get('valor').valid && (movimentacaoForm.get('valor').dirty || movimentacaoForm.get('valor').touched))"
+                for="inputSuccess">
+                <i class="fa fa-check"></i> OK</label>
+              <label class="control-label" *ngIf="(!movimentacaoForm.get('valor').valid && (movimentacaoForm.get('valor').dirty || movimentacaoForm.get('valor').touched))"
+                for="inputError">
+                <i class="fa fa-times-circle-o"></i> Campo obrigatorio e somente numeros, com apenas 2 casas decimais(se houver) </label>
+            </div>
+            <div class="form-group">
+              <label>Funcionario</label>
+              <select class="form-control" formControlName="funcionarioId">
+                <option *ngFor="let funcionario of funcionarios" [ngValue]="funcionario.id">
+                  {{ funcionario?.nome }}
+                </option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="box-footer">
+          <button type="submit" (click)="limparCampos()" class="btn btn-danger">Cancelar</button>
+          <button type="submit" (click)="registrarMovimentacao()" [disabled]='(!movimentacaoForm.valid)' class="btn btn-success pull-right">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Movimentações cadastradas</h3>
+
+          <div class="box-tools">
+
+
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <!-- <input type="text" name="table_search" class="form-control" placeholder="Filtrar por descrição"> -->
+
+              <select class="form-control" placeholder="Filtrar por funcionario" [(ngModel)]="funcionarioIdFilter">
+                <option selected></option>
+                <option *ngFor="let funcionario of funcionarios" [ngValue]="funcionario.id">
+                  {{ funcionario?.nome }}
+                </option>
+              </select>
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default" (click)="FiltrarMovimentacoes()">
+                  <i class="fa fa-filter"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tr>
+              <th>Descricao</th>
+              <th>Valor</th>
+              <th>Funcionario</th>
+            </tr>
+            <tr *ngFor="let movimentacao of movimentacoes">
+              <td>{{movimentacao?.descricao}}</td>
+              <td>{{movimentacao?.valor}}</td>
+              <td>{{movimentacao?.funcionario.nome}}</td>
+            </tr>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
+</section>

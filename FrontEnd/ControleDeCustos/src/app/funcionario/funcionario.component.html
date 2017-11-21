@@ -8,11 +8,11 @@
           </div>
           <div class="box-body">
             <form [formGroup]="funcionarioForm" novalidate>
-              <div class="form-group" [ngClass]="{'has-error': (!funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched)) , 'has-success': (funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))} ">
+              <div class="form-group" [ngClass]="{'has-error': (!funcionarioForm.get('nome').valid && (funcionarioForm.get('nome').dirty || funcionarioForm.get('nome').touched)) , 'has-success': (funcionarioForm.get('nome').valid && (funcionarioForm.get('nome').dirty || funcionarioForm.get('nome').touched))} ">
                 <label>Funcionario</label>
-                <input type="email" class="form-control" placeholder="Nome do funcionario" formControlName="nome">
-                <label class="control-label" *ngIf="(funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))" for="inputSuccess"><i class="fa fa-check"></i> OK</label>
-                <label class="control-label" *ngIf="(!funcionarioForm.valid && (funcionarioForm.dirty || funcionarioForm.touched))" for="inputError"><i class="fa fa-times-circle-o"></i> Campo deve conter 2 a 100 caracteres</label>
+                <input type="text" class="form-control" placeholder="Nome do funcionario" formControlName="nome">
+                <label class="control-label" *ngIf="(funcionarioForm.get('nome').valid && (funcionarioForm.get('nome').dirty || funcionarioForm.get('nome').touched))" for="inputSuccess"><i class="fa fa-check"></i> OK</label>
+                <label class="control-label" *ngIf="(!funcionarioForm.get('nome').valid && (funcionarioForm.get('nome').dirty || funcionarioForm.get('nome').touched))" for="inputError"><i class="fa fa-times-circle-o"></i> Campo deve conter 2 a 100 caracteres</label>
               </div>
               <div class="row">
                 <div class="col-lg-6">

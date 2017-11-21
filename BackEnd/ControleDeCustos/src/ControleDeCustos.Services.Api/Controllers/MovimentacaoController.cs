@@ -31,7 +31,14 @@ namespace ControleDeCustos.Services.Api.Controllers
         {
             return _movAppService.ObterPorId(id);
         }
-        
+
+        [HttpGet]
+        [Route("obter-movimentacao-por-funcionario/{idFuncionario:guid}/{descricao:string}")]
+        public MovimentacaoViewModel GetPorFiltros(Guid idFuncionario, string descricao)
+        {
+            return _movAppService.ObterPorId(idFuncionario);
+        }
+
         [HttpPost]
         [Route("adicionar-movimentacao")]
         public void Post([FromBody]MovimentacaoViewModel model)

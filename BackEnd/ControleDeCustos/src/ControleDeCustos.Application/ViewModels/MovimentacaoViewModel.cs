@@ -13,6 +13,8 @@ namespace ControleDeCustos.Application.ViewModels
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
 
-        public virtual FuncionarioViewModel Funcionario { get; set; }
+        public Guid FuncionarioId { get; set; }
+
+        public FuncionarioViewModel Funcionario { get; set; }
     }
 }

@@ -68,7 +68,7 @@ export class FuncionarioComponent implements OnInit {
     this.funcionario.nome =  this.funcionarioForm.value.nome;
     this.funcionario.departamentos = this.funcionarioDepartamento;
 
-    console.log(JSON.stringify(this.funcionario));
+    // console.log(JSON.stringify(this.funcionario));
 
     this.funService.registrarFuncionario(this.funcionario)
       .subscribe(result => {

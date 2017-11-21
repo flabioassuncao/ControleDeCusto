@@ -9,13 +9,5 @@ namespace ControleDeCustos.Infra.Data.Repository
         public DepartamentoRepository(CDCContext context) : base(context)
         {
         }
-
-        //public override IEnumerable<Departamento> ObterTodos()
-        //{
-        //    var sql = "SELECT * FROM DEPARTAMENTOS E";
-
-        //    return Db.Database.GetDbConnection().Query<Departamento>(sql);
-        //}
-
     }
 }

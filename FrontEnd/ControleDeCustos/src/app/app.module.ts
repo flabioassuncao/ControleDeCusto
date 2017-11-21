@@ -13,6 +13,7 @@ import { ROUTES } from './app.routes';
 import { DepartamentoService } from './services/departamento.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FuncionarioService } from './services/funcionario.service';
+import { MovimentacaoService } from './services/movimentacao.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FuncionarioService } from './services/funcionario.service';
   ],
   providers: [
     DepartamentoService,
-    FuncionarioService
+    FuncionarioService,
+    MovimentacaoService
   ],
   bootstrap: [AppComponent]
 })
