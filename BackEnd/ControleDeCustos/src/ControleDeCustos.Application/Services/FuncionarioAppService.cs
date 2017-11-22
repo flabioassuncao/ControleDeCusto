@@ -38,7 +38,7 @@ namespace ControleDeCustos.Application.Services
             _funcRepository.Atualizar(_mapper.Map<Funcionario>(funcionarioViewModel));
             _uow.Commit();
         }
-        
+
         public void Excluir(Guid id)
         {
             _funcRepository.Remover(id);

@@ -14,6 +14,8 @@ using System.IdentityModel.Tokens.Jwt;
 using ControleDeCustos.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using ControleDeCustos.Domain.Entities;
+using ControleDeCustos.Application.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ControleDeCustos.Services.Api.Controllers
 {
@@ -22,17 +24,17 @@ namespace ControleDeCustos.Services.Api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IFuncionarioRepository _funcRepository;
+        private readonly IFuncionarioAppService _funcService;
 
         private readonly JwtTokenOptions _jwtTokenOptions;
 
         public AccountController(IUser user,
-                                 IFuncionarioRepository funcRepository,
+                                 IFuncionarioAppService funcService,
                                  IOptions<JwtTokenOptions> jwtTokenOptions,
                                  UserManager<ApplicationUser> userManager,
                                  SignInManager<ApplicationUser> signInManager) : base(user)
         {
-            _funcRepository = funcRepository;
+            _funcService = funcService;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtTokenOptions = jwtTokenOptions.Value;
@@ -54,7 +56,7 @@ namespace ControleDeCustos.Services.Api.Controllers
             }
 
             if (!ModelState.IsValid) return Response(model, false, "Preecher todos os campos");
-
+            
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -63,19 +65,16 @@ namespace ControleDeCustos.Services.Api.Controllers
             {
                 try
                 {
-                    /// FALTA TERMINAR IMPLEMENTAÇÃO DA REGRA DE LOGIN 
-                    //_funcRepository.Adicionar()
+                    var response = GerarTokenUsuario(new LoginViewModel { Email = model.Email, Password = model.Password });
+                    return Response(response, true, "Funcionario criado com sucesso!");
                 }
-                catch ( Exception ex)
-                {
+                catch (Exception) {
                     await _userManager.DeleteAsync(user);
-                    return Response(model, false, "falha ao cadastrar funcionario");
+                    return Response(model, false, "Erro ao registrar usuario!");
                 }
-                                
-                var response = GerarTokenUsuario(new LoginViewModel { Email = model.Email, Password = model.Password });
-                return Response(response, true, "Funcionario criado com sucesso!");
             }
-            
+
+            await _userManager.DeleteAsync(user);
             return Response(model, false, "Erro ao registrar usuario!");
         }
 
@@ -93,6 +92,7 @@ namespace ControleDeCustos.Services.Api.Controllers
 
             if (result.Succeeded)
             {
+                
                 var response = GerarTokenUsuario(model);
                 return Response(response, true, "");
             }
@@ -119,8 +119,7 @@ namespace ControleDeCustos.Services.Api.Controllers
                   signingCredentials: _jwtTokenOptions.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-            var funcUser = _funcRepository.ObterPorId(Guid.Parse(user.Id));
-
+            
             var response = new
             {
                 access_token = encodedJwt,
@@ -128,7 +127,6 @@ namespace ControleDeCustos.Services.Api.Controllers
                 user = new
                 {
                     id = user.Id,
-                    nome = funcUser.Nome,
                     email = user.Email,
                     claims = userClaims.Select(c => new { c.Type, c.Value })
                 }

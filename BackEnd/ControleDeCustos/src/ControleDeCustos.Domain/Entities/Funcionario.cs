@@ -7,7 +7,9 @@ namespace ControleDeCustos.Domain.Entities
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        
+
+        //public Guid IdAcesso { get; set; }
+
         public virtual ICollection<FuncionarioDepartamento> Departamentos { get; set; }
         public virtual ICollection<Movimentacao> Movimentacoes { get; set; }
     }

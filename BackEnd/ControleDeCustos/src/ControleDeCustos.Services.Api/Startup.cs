@@ -32,7 +32,7 @@ namespace ControleDeCustos.Services.Api
 
         public IConfiguration Configuration { get; }
 
-        private const string SecretKey = "C4CW3bToken";
+        private const string SecretKey = "C4CW3bToken@mail.com.br";
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -41,9 +41,18 @@ namespace ControleDeCustos.Services.Api
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => {
+
+                //options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredUniqueChars = 6;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            
 
             services.AddOptions();
             services.AddMvc(options =>
