@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import { DepartamentoService } from '../services/departamento.service';
 import { Departamento } from '../models/departamento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-departamento',
@@ -14,7 +15,8 @@ export class DepartamentoComponent implements OnInit {
   departamento: Departamento;
 
   constructor(private depService: DepartamentoService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit() {
     this.carrregarDepartamentos();
@@ -25,7 +27,13 @@ export class DepartamentoComponent implements OnInit {
   }
 
   carrregarDepartamentos() {
-    this.depService.departamentos().subscribe(departamentos => this.departamentos = departamentos);
+    this.depService.departamentos().subscribe(departamentos => {
+      this.departamentos = departamentos;
+    },
+    reponse => {
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
+    });
   }
 
   limparCampos() {

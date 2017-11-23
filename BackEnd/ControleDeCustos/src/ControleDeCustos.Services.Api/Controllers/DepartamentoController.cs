@@ -8,7 +8,7 @@ using ControleDeCustos.Domain.Interfaces;
 
 namespace ControleDeCustos.Services.Api.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class DepartamentoController : BaseController
     {
         private readonly IDepartamentoAppService _departamentoAppService;

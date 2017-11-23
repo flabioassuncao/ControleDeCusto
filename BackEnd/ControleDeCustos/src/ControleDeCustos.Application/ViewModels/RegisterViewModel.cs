@@ -8,9 +8,9 @@ namespace ControleDeCustos.Application.ViewModels
         public string Email { get; set; }
         
         [Required]
-        public string Password { get; set; }
+        public string Senha { get; set; }
 
         [Required]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmarSenha { get; set; }
     }
 }

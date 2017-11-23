@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,6 +15,14 @@ import { DepartamentoService } from './services/departamento.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FuncionarioService } from './services/funcionario.service';
 import { MovimentacaoService } from './services/movimentacao.service';
+import { AcessoComponent } from './acesso/acesso.component';
+import { LoginService } from './services/login.service';
+import { LoggedInGuard } from './acesso/loggedin.guard';
+
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { NotificacaoComponent } from './notificacao/notificacao.component';
+import { NotificationService } from './notificacao/notification.service';
+
 
 @NgModule({
   declarations: [
@@ -22,19 +31,26 @@ import { MovimentacaoService } from './services/movimentacao.service';
     FuncionarioComponent,
     DepartamentoComponent,
     MovimentacaoComponent,
-    HomeComponent
+    HomeComponent,
+    AcessoComponent,
+    NotificacaoComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: false})
   ],
   providers: [
     DepartamentoService,
     FuncionarioService,
-    MovimentacaoService
+    MovimentacaoService,
+    LoginService,
+    NotificationService,
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

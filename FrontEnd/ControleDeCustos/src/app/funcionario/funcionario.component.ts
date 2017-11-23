@@ -5,6 +5,7 @@ import { FuncionarioService } from '../services/funcionario.service';
 import { DepartamentoService } from '../services/departamento.service';
 import { Departamento } from '../models/departamento';
 import { FuncionarioDepartamento } from '../models/funcionario_departamento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-funcionario',
@@ -20,7 +21,8 @@ export class FuncionarioComponent implements OnInit {
 
   constructor(private funService: FuncionarioService,
     private depService: DepartamentoService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.carrregarFuncionarios();
@@ -34,8 +36,11 @@ export class FuncionarioComponent implements OnInit {
 
   carrregarFuncionarios() {
     this.funService.funcionarios().subscribe(funcionarios => {
-      console.log(funcionarios);
       this.funcionarios = funcionarios;
+    },
+    reponse => {
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
     });
   }
 

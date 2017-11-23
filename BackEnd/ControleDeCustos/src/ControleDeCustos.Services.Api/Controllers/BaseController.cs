@@ -7,13 +7,13 @@ namespace ControleDeCustos.Services.Api.Controllers
     [Produces("application/json")]
     public class BaseController : Controller
     {
-        protected Guid FuncionarioId { get; set; }
+        protected Guid UsuarioId { get; set; }
 
         public BaseController(IUser user)
         {
             if (user.IsAuthenticated())
             {
-                FuncionarioId = user.GetUserId();
+                UsuarioId = user.GetUserId();
             }
         }
 

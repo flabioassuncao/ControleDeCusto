@@ -9,7 +9,7 @@ using ControleDeCustos.Application.DTO;
 
 namespace ControleDeCustos.Services.Api.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class FuncionarioController : BaseController
     {
         private readonly IFuncionarioAppService _funcAppService;

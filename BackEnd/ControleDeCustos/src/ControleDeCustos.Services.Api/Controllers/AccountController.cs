@@ -59,13 +59,13 @@ namespace ControleDeCustos.Services.Api.Controllers
             
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Senha);
 
             if (result.Succeeded)
             {
                 try
                 {
-                    var response = GerarTokenUsuario(new LoginViewModel { Email = model.Email, Password = model.Password });
+                    var response = GerarTokenUsuario(new LoginViewModel { Email = model.Email, Senha = model.Senha });
                     return Response(response, true, "Funcionario criado com sucesso!");
                 }
                 catch (Exception) {
@@ -88,7 +88,7 @@ namespace ControleDeCustos.Services.Api.Controllers
                 return Response(model, false, "Informar login e senha");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, true);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, false, true);
 
             if (result.Succeeded)
             {
@@ -98,6 +98,17 @@ namespace ControleDeCustos.Services.Api.Controllers
             }
             
             return Response(model, false, "Falha ao realizar login");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("verificar-autenticacao")]
+        public IActionResult VerificarUser()
+        {
+            if(User.Identity.IsAuthenticated)
+                return Response(new object(), true, "");
+
+            return Response(new object(), false, "Falha ao realizar login");
         }
 
         private async Task<object> GerarTokenUsuario(LoginViewModel login)

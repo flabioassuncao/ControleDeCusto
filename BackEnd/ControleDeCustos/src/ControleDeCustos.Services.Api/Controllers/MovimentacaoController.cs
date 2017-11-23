@@ -8,7 +8,7 @@ using ControleDeCustos.Application.ViewModels;
 
 namespace ControleDeCustos.Services.Api.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class MovimentacaoController : BaseController
     {
         private readonly IMovimentacaoAppService _movAppService;

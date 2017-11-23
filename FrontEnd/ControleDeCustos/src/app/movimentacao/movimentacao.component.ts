@@ -4,6 +4,7 @@ import { Funcionario } from '../models/funcionario';
 import { Movimentacao } from '../models/movimentacao';
 import { FuncionarioService } from '../services/funcionario.service';
 import { MovimentacaoService } from '../services/movimentacao.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movimentacao',
@@ -23,7 +24,8 @@ export class MovimentacaoComponent implements OnInit {
 
   constructor(private funService: FuncionarioService,
     private movService: MovimentacaoService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.carrregarFuncionarios();
@@ -41,7 +43,13 @@ export class MovimentacaoComponent implements OnInit {
   }
 
   carrregarMovimentacoes() {
-    this.movService.movimentacaoes().subscribe(movimentacoes => this.movimentacoes = movimentacoes);
+    this.movService.movimentacaoes().subscribe(movimentacoes => {
+      this.movimentacoes = movimentacoes;
+    },
+    reponse => {
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
+    });
   }
 
   limparCampos() {
