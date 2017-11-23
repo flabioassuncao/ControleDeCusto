@@ -14,6 +14,8 @@ ASP.NET Core 2.0
 
 Entity FrameworkCORE
 
+ASP.NET Core Identity
+
 Dapper
 
 Swagger
