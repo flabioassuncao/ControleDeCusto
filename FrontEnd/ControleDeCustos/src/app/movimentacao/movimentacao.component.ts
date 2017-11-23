@@ -5,6 +5,8 @@ import { Movimentacao } from '../models/movimentacao';
 import { FuncionarioService } from '../services/funcionario.service';
 import { MovimentacaoService } from '../services/movimentacao.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../notificacao/notification.service';
+import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-movimentacao',
@@ -25,7 +27,8 @@ export class MovimentacaoComponent implements OnInit {
   constructor(private funService: FuncionarioService,
     private movService: MovimentacaoService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private notification: NotificationService) { }
 
   ngOnInit() {
     this.carrregarFuncionarios();
@@ -39,16 +42,20 @@ export class MovimentacaoComponent implements OnInit {
   }
 
   carrregarFuncionarios() {
-    this.funService.funcionarios().subscribe(funcionarios => this.funcionarios = funcionarios);
+    this.funService.funcionarios().subscribe(funcionarios => {
+      this.funcionarios = funcionarios;
+    },
+    erros => {
+      this.errorRequisicao(erros);
+    });
   }
 
   carrregarMovimentacoes() {
     this.movService.movimentacaoes().subscribe(movimentacoes => {
       this.movimentacoes = movimentacoes;
     },
-    reponse => {
-      localStorage.clear();
-      this.router.navigate(['/acesso']);
+    erros => {
+      this.errorRequisicao(erros);
     });
   }
 
@@ -65,19 +72,37 @@ export class MovimentacaoComponent implements OnInit {
       .subscribe(result => {
         this.limparCampos();
         this.carrregarMovimentacoes();
+      },
+      erros => {
+        this.errorRequisicao(erros);
       });
   }
 
   filtrarMovimentacoes() {
     this.movService.movimentacaoesFiltradas(this.funcionarioIdFilter, this.descricaoFilter)
-              .subscribe(movimentacoes => this.movimentacoes = movimentacoes);
+      .subscribe(movimentacoes => {
+        this.movimentacoes = movimentacoes;
+      },
+      erros => {
+        this.errorRequisicao(erros);
+      });
   }
 
   limparFiltros() {
     this.funcionarioIdFilter = '0';
     this.descricaoFilter = '';
     this.movService.movimentacaoesFiltradas(this.funcionarioIdFilter, this.descricaoFilter)
-    .subscribe(movimentacoes => this.movimentacoes = movimentacoes);
+      .subscribe(movimentacoes => this.movimentacoes = movimentacoes);
+  }
+
+  errorRequisicao(erro: any) {
+    if (erro.status === 401) {
+      this.notification.notify('Acesso expirado, logue novamente!');
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
+    } else {
+      this.notification.notify('Erro ao processar solicitação, tente novamente!');
+    }
   }
 
 }

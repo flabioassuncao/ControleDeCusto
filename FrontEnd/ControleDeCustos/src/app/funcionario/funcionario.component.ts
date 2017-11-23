@@ -6,6 +6,7 @@ import { DepartamentoService } from '../services/departamento.service';
 import { Departamento } from '../models/departamento';
 import { FuncionarioDepartamento } from '../models/funcionario_departamento';
 import { Router } from '@angular/router';
+import { NotificationService } from '../notificacao/notification.service';
 
 @Component({
   selector: 'app-funcionario',
@@ -20,9 +21,10 @@ export class FuncionarioComponent implements OnInit {
   funcionarioDepartamento: FuncionarioDepartamento[] = [];
 
   constructor(private funService: FuncionarioService,
-    private depService: DepartamentoService,
-    private formBuilder: FormBuilder,
-    private router: Router) { }
+              private depService: DepartamentoService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private notification: NotificationService) { }
 
   ngOnInit() {
     this.carrregarFuncionarios();
@@ -38,14 +40,18 @@ export class FuncionarioComponent implements OnInit {
     this.funService.funcionarios().subscribe(funcionarios => {
       this.funcionarios = funcionarios;
     },
-    reponse => {
-      localStorage.clear();
-      this.router.navigate(['/acesso']);
+    erros => {
+      this.errorRequisicao(erros);
     });
   }
 
   carrregarDepartamentos() {
-    this.depService.departamentos().subscribe(departamentos => this.departamentos = departamentos);
+    this.depService.departamentos().subscribe(departamentos => {
+      this.departamentos = departamentos;
+    },
+    erros => {
+      this.errorRequisicao(erros);
+    });
   }
 
   adicionarDepartamento() {
@@ -73,10 +79,26 @@ export class FuncionarioComponent implements OnInit {
   registrarFuncionario() {
     this.funcionario.nome =  this.funcionarioForm.value.nome;
     this.funcionario.departamentos = this.funcionarioDepartamento;
+
     this.funService.registrarFuncionario(this.funcionario)
       .subscribe(result => {
+        this.notification.notify('Funcionario registrado com sucesso!');
         this.limparCampos();
         this.carrregarFuncionarios();
+      },
+      erros => {
+        this.errorRequisicao(erros);
       });
+  }
+
+  errorRequisicao(erro: any) {
+    console.log(erro.status);
+    if (erro.status === 401) {
+      this.notification.notify('Acesso expirado, logue novamente!');
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
+    } else {
+      this.notification.notify('Erro ao processar solicitação, tente novamente!');
+    }
   }
 }

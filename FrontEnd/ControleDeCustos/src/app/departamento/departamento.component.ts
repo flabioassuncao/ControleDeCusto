@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/for
 import { DepartamentoService } from '../services/departamento.service';
 import { Departamento } from '../models/departamento';
 import { Router } from '@angular/router';
+import { NotificationService } from '../notificacao/notification.service';
 
 @Component({
   selector: 'app-departamento',
@@ -16,7 +17,8 @@ export class DepartamentoComponent implements OnInit {
 
   constructor(private depService: DepartamentoService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private notification: NotificationService) { }
 
   ngOnInit() {
     this.carrregarDepartamentos();
@@ -30,9 +32,8 @@ export class DepartamentoComponent implements OnInit {
     this.depService.departamentos().subscribe(departamentos => {
       this.departamentos = departamentos;
     },
-    reponse => {
-      localStorage.clear();
-      this.router.navigate(['/acesso']);
+    erros => {
+      this.errorRequisicao(erros);
     });
   }
 
@@ -46,7 +47,20 @@ export class DepartamentoComponent implements OnInit {
       .subscribe(result => {
         this.limparCampos();
         this.carrregarDepartamentos();
+      },
+      erros => {
+        this.errorRequisicao(erros);
       });
+  }
+
+  errorRequisicao(erro: any) {
+    if (erro.status === 401) {
+      this.notification.notify('Acesso expirado, logue novamente!');
+      localStorage.clear();
+      this.router.navigate(['/acesso']);
+    } else {
+      this.notification.notify('Erro ao processar solicitação, tente novamente!');
+    }
   }
 
 }
