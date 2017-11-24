@@ -28,6 +28,8 @@ Injeção de depêndencia
 
 Divisão em camadas
 
+JSON Web Token
+
 ```
 
 
